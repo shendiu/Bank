@@ -18,7 +18,7 @@ public class Customer {
     }
 
     public Account getAccount(int accNo) {
-        if (accNo < accounts.length && numOfAccounts != 0 ) {
+        if (accNo < accounts.length && numOfAccounts != 0) {
             return accounts[accNo];
         }
         return null;
@@ -26,11 +26,21 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{ " +
-                " fullName='" + fullName + '\'' +
-                ", customerNumber=" + customerNumber +
-                ", numOfAccounts=" + numOfAccounts +
-                " }";
+        String s = "Customer: " +
+                "FullName = " + fullName +
+                ", customerNumber = " + customerNumber +
+                ", numOfAccounts = " + numOfAccounts;
+
+        for (int i = 0; i < this.numOfAccounts; i++) {
+            Account acc = getAccount(i);
+            if (acc instanceof SavingsAccount)
+                s = s + "\n\t" + (i+1) + " Savings account with interest rate % " + ((SavingsAccount) acc).getInterestRate();
+            else
+                s = s + "\n\t" + (i+1) + " Checking account with overdraft $" + ((CheckingAccount) acc).getOverdraftAmount();
+            s = s + ", balance $" + acc.getBalance();
+        }
+        s = s + "\n";
+        return s;
     }
 
     public void addAccount(Account acc) {
