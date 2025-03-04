@@ -30,7 +30,7 @@ public class Account {
         return false;
     }
 
-    public boolean withdraw(double amt) {
+    public boolean withdraw(double amt) throws Exception {
         if (amt <= balance) {
             balance -= amt;
             return true;

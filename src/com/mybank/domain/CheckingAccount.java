@@ -14,12 +14,12 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    public boolean withdraw(double amt) {
+    public boolean withdraw(double amt) throws OverdraftException {
         if (amt <= balance + overdraftAmount) {
             balance = balance - amt;
             return true;
         }
-        return false;
+        throw new OverdraftException("Error! Insufficient funds", (amt - balance - overdraftAmount));
     }
 
     public double getOverdraftAmount() {

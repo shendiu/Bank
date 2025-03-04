@@ -1,17 +1,14 @@
-package test;
+package com.mybank.test;
 
-import com.mybank.domain.Bank;
-import com.mybank.domain.CheckingAccount;
-import com.mybank.domain.Customer;
-import com.mybank.domain.SavingsAccount;
+import com.mybank.domain.*;
 
 public class Test {
     public static void main(String[] args) {
 
         Bank bank = Bank.getBank();
 
-        Customer firstCustomer = new Customer("John Don");
-        Customer secondCustomer = new Customer("Jane O'Connor");
+        Customer firstCustomer = new Customer("John","Don");
+        Customer secondCustomer = new Customer("Jane","O'Connor");
 
         SavingsAccount johnSavings = new SavingsAccount(1000, 5);
         CheckingAccount janeAccount = new CheckingAccount(500, 100);
@@ -26,7 +23,13 @@ public class Test {
         displayCustomers(bank);
 
         bank.getCustomer(0).getAccount(0).deposit(2000);
-        bank.getCustomer(0).getAccount(1).withdraw(5500);
+        try {
+            bank.getCustomer(0).getAccount(1).withdraw(7500);
+        } catch (OverdraftException oe) {
+            System.out.println(oe.getMessage() + ": $" + oe.getDeficit() + "!\n");
+        } catch (Exception e) {
+            System.out.println("Something went wrong:-(");
+        }
         ((SavingsAccount) bank.getCustomer(0).getAccount(0)).addInterestRate();
 
         displayCustomers(bank);
