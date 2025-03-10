@@ -13,7 +13,7 @@ public class CustomerReport {
 
         // Print report header
         System.out.println("\t\t\tCUSTOMERS REPORT");
-        System.out.println("\t\t\t================");
+        System.out.println("================================================================================");
 
         Bank bank = Bank.getBank();
 
